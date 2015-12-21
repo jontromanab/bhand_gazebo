@@ -34,12 +34,13 @@ CLOSE_HALF_GRASP = 6
 
 To run the robot by publishing positions to the topic:
 
+
 rostopic pub /bhand_node/command sensor_msgs/JointState "header:
   seq: 0
   stamp: {secs: 0, nsecs: 0}
   frame_id: ''
-name: ['j11_joint', 'j32_joint', 'j12_joint', 'j22_joint']
-position: [0.5 , 0.5, 1.0, 1.5]
+name: ['j11_joint', 'j12_joint', 'j21_joint', 'j22_joint','j32_joint']
+position: [0.5 , 0.5, 1.0, 1.5, 3.14,]
 velocity: [0]
 effort: [0]" 
 
