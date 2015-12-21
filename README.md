@@ -1,6 +1,6 @@
 This is a package for simulating Barrett hand in Gazebo.
 
-The original simulation package from RobotnikAutomation (barrett_hand_sim) https://github.com/RobotnikAutomation/barrett_hand_sim  does not provide the needed service call to simulate the hand exactly like the hardware. The joint bh_j11_position_controller (spread) only moves the 1st finger on spread.
+The existing simulation package for Barrett hand does not provide the needed service call to simulate the hand exactly like the hardware. The joint bh_j11_position_controller (spread) only moves the 1st finger on spread.
 
 This package provides the needed action services exactly as the robot in hardware. Also the two spread joints for two fingers are included.
 
@@ -40,9 +40,8 @@ rostopic pub /bhand_node/command sensor_msgs/JointState "header:
   stamp: {secs: 0, nsecs: 0}
   frame_id: ''
 name: ['j11_joint', 'j12_joint', 'j21_joint', 'j22_joint','j32_joint']
-position: [0.5 , 0.5, 1.0, 1.5, 3.14,]
+position: [0.5 , 0.5, 0.5, 0.5, 1.5]
 velocity: [0]
 effort: [0]" 
-
 
 
