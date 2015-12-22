@@ -10,31 +10,8 @@ pub_j12=rospy.Publisher("/bh_j12_position_controller/command",Float64, queue_siz
 pub_j21=rospy.Publisher("/bh_j21_position_controller/command",Float64, queue_size=10)
 pub_j22=rospy.Publisher("/bh_j22_position_controller/command",Float64, queue_size=10) 
 pub_j32=rospy.Publisher("/bh_j32_position_controller/command",Float64, queue_size=10)
-joint_states_pub = rospy.Publisher("bh_joint_states", JointState, queue_size=10)
 
 
-def callback2(data):
-    
-    #rospy.loginfo(rospy.get_caller_id() + "I heard %s %f", data.name[2],data.position[3])
-    # Construct message & publish joint states
-    msg = JointState()
-    msg.name = []
-    msg.position = []
-    msg.velocity = []
-    msg.effort = []
-       
-    for i in range(0,7):
-        msg.name.append(data.name[i])   
-        msg.position.append(data.position[i]) 
-        msg.velocity.append(data.velocity[i])
-        msg.effort.append(data.effort[i])            
-    
-    msg.header.stamp = rospy.Time.now()
-    msg.header.frame_id = ''
-    joint_states_pub.publish(msg)  
-	
-           
-          
 
 def callback(data):
     #rospy.loginfo(rospy.get_caller_id() + "I heard %s %f", data.name,data.position[3])
@@ -99,7 +76,7 @@ def listener():
     rospy.Subscriber('%s/command'%rospy.get_name(), JointState, callback)
 #Creating the service for performing different grasp mode.Always try to start from Initialization mode: rosservice call /bhand_node/actions 1
     rospy.Service('%s/actions'%rospy.get_name(), Actions, handle_action)
-    rospy.Subscriber('joint_states', JointState, callback2)
+    
     
     rospy.spin()
 
