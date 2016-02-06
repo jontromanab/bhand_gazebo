@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!-- Please make sure the Barrett hand is running in Gazebo and the all the joints are publishing the joint states before running the node. Otherwise the node will not find the desired publishers -->
+
+	<node name="bhand_node" pkg="bhand_gazebo" type="bhand_node_spread_fixed.py" />
+
+
+</launch>
