@@ -45,3 +45,4 @@ velocity: [0]
 effort: [0]" 
 
 
+The new bhand_spread_fixed_controller_gazebo.launch file is for the spread fixed barrett hand as the real robot has only one spread joint and the urdf has two spread joints, we have fixed the spread joint just for now. TODO//
