@@ -5,11 +5,10 @@ from sensor_msgs.msg import JointState
 from bhand_gazebo.srv import *
 
 #individual publishers for the joints
-pub_j11=rospy.Publisher("/bh_j11_position_controller/command",Float64, queue_size=10)
-pub_j12=rospy.Publisher("/bh_j12_position_controller/command",Float64, queue_size=10)
-pub_j21=rospy.Publisher("/bh_j21_position_controller/command",Float64, queue_size=10)
-pub_j22=rospy.Publisher("/bh_j22_position_controller/command",Float64, queue_size=10) 
-pub_j32=rospy.Publisher("/bh_j32_position_controller/command",Float64, queue_size=10)
+pub_j11=rospy.Publisher("/bh_j11_position_controller/command",Float64, queue_size=5)
+pub_j12=rospy.Publisher("/bh_j12_position_controller/command",Float64, queue_size=5)
+pub_j22=rospy.Publisher("/bh_j22_position_controller/command",Float64, queue_size=5) 
+pub_j32=rospy.Publisher("/bh_j32_position_controller/command",Float64, queue_size=5)
 
 
 
@@ -17,29 +16,27 @@ def callback(data):
     #rospy.loginfo(rospy.get_caller_id() + "I heard %s %f", data.name,data.position[3])
     #rospy.loginfo(rospy.get_caller_id() + "OK I heard %f", data.position[4])
     
-    rate = rospy.Rate(10) # 10hz
-    while not rospy.is_shutdown():
-          pub_j11.publish(data.position[0])
-          pub_j12.publish(data.position[1])
-          pub_j21.publish(data.position[2])
-          pub_j22.publish(data.position[3])
-          pub_j32.publish(data.position[4])
-          rate.sleep()
+    #rate = rospy.Rate(5) # 10hz
+    #while not rospy.is_shutdown():
+    pub_j11.publish(data.position[0])
+    pub_j12.publish(data.position[1])
+    pub_j22.publish(data.position[2])
+    pub_j32.publish(data.position[3])
+          #rate.sleep()
 
 def handle_action(req):
     
     if req.action==1:
 	pub_j11.publish(0.0)
 	pub_j12.publish(0.0)
-	pub_j21.publish(0.0)
 	pub_j22.publish(0.0)
 	pub_j32.publish(0.0)
 	print "Setting hand in Initialization mode"
 	return True
     elif req.action==2:
-	pub_j12.publish(3.14)
-	pub_j22.publish(3.14)
-	pub_j32.publish(3.14)
+	pub_j12.publish(2.44)
+	pub_j22.publish(2.44)
+	pub_j32.publish(2.44)
 	print "Setting hand in Close Grasp mode"
 	return True
     elif req.action==3:
@@ -50,12 +47,18 @@ def handle_action(req):
 	return True
     elif req.action==4:
 	pub_j11.publish(0.0)
-	pub_j21.publish(0.0)
+	pub_j12.publish(0.0)
+	pub_j22.publish(0.0)
+	pub_j32.publish(0.0)
+	
 	print "Setting hand in Grasping mode 1"
 	return True
     elif req.action==5:
 	pub_j11.publish(3.14)
-	pub_j21.publish(3.14)
+	pub_j12.publish(0.0)
+	pub_j22.publish(0.0)
+	pub_j32.publish(0.0)
+	
 	print "Setting hand in Grasping mode 2"
 	return True
     elif req.action==6:
